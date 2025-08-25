@@ -1,0 +1,622 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groth Lady Model ($GLM) - Chase The Vibe</title>
+    <meta name="description" content="Hot, toxic anime baddie with zero chill. Groth Lady Model ($GLM) is for degens chasing vibes, not safety.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #a855f7; /* Vibrant Purple */
+            --secondary-color: #0ea5e9; /* Accent Blue */
+            --background-color: #0a0a0a;
+            --surface-color: rgba(20, 20, 20, 0.6);
+            --text-color: #e5e7eb;
+            --text-muted-color: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-primary: 'Poppins', sans-serif;
+            --font-heading: 'Chakra Petch', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* General Layout & Typography */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 0;
+        }
+
+        section {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            text-shadow: 0 0 15px var(--primary-color);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted-color);
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        .logo-container .ticker {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px; /* Header height */
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .hero-image-container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--primary-color) 0%, rgba(168, 85, 247, 0) 60%);
+            transform: translate(-50%, -50%);
+            filter: blur(50px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin: 1rem 0 2rem;
+            max-width: 50ch;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: #fff;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .contract-address {
+            margin-top: 2.5rem;
+            background: var(--surface-color);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contract-address code {
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            color: var(--text-muted-color);
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        #about .container {
+            text-align: center;
+        }
+        #about p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tokenomics Section */
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .tokenomics-card {
+            text-align: center;
+        }
+
+        .tokenomics-card h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tokenomics-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* How to Buy Section */
+        .how-to-buy-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Community Section */
+        #community .container {
+            text-align: center;
+        }
+
+        #community p {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: #050505;
+        }
+
+        .footer p {
+            margin: 0;
+            color: var(--text-muted-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .tokenomics-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero .container {
+                flex-direction: row;
+                text-align: left;
+                gap: 4rem;
+            }
+
+            .hero-text {
+                flex: 1;
+            }
+
+            .hero-image-container {
+                flex: 0 0 45%;
+                max-width: 500px;
+            }
+
+            .cta-buttons, .contract-address {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-animation"></div>
+
+    <header class="header">
+        <a href="#" class="logo-container">
+            <img src="https://yoahusjzxyasdporfmmt.supabase.co/storage/v1/object/public/token-logos/a6e91d65-804c-455d-b94c-2af2fa95815b.png?" alt="Groth Lady Model Logo">
+            <span class="ticker">$GLM</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">Creed</a></li>
+                <li><a href="#tokenomics">Rules</a></li>
+                <li><a href="#how-to-buy">Ritual</a></li>
+                <li><a href="#community">Coven</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-text reveal">
+                    <h1>Groth Lady Model</h1>
+                    <p class="subtitle">Hot, toxic, and zero chill. This is for the degens chasing a vibe, not a guarantee. Enter at your own risk.</p>
+                    <div class="cta-buttons">
+                        <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=C1jFmyh7F7t3mDYsfV67fuza6osEhpVoh8sMArVtueCV" target="_blank" class="btn btn-primary">Buy $GLM</a>
+                        <a href="https://dexscreener.com/solana/C1jFmyh7F7t3mDYsfV67fuza6osEhpVoh8sMArVtueCV" target="_blank" class="btn btn-secondary">View Chart</a>
+                    </div>
+                    <div class="contract-address">
+                        <code>C1jFmyh7F7t3mDYsfV67fuza6osEhpVoh8sMArVtueCV</code>
+                        <button class="copy-btn" id="copyButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            <span id="copyText">Copy</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image-container reveal">
+                    <img src="https://yoahusjzxyasdporfmmt.supabase.co/storage/v1/object/public/token-logos/a6e91d65-804c-455d-b94c-2af2fa95815b.png?" alt="Groth Lady Model Character" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container reveal">
+                <h2>The Creed</h2>
+                <p>We don't write whitepapers. We set a mood. Groth Lady Model is an experiment in digital identity and collective belief. It's a symbol for those who value raw aesthetic and cultural resonance over safe bets and utility promises. We're here for the chaos, the culture, and the ride. Simp. Send. Suffer. Succeed.</p>
+            </div>
+        </section>
+
+        <!-- Tokenomics Section -->
+        <section id="tokenomics">
+            <div class="container reveal">
+                <h2>The Rules</h2>
+                <div class="tokenomics-grid">
+                    <div class="card tokenomics-card">
+                        <h3>Total Supply</h3>
+                        <span class="value">1B $GLM</span>
+                    </div>
+                    <div class="card tokenomics-card">
+                        <h3>Taxes</h3>
+                        <span class="value">0% Buy / 0% Sell</span>
+                    </div>
+                    <div class="card tokenomics-card">
+                        <h3>Liquidity</h3>
+                        <span class="value">Burned</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Buy Section -->
+        <section id="how-to-buy">
+            <div class="container reveal">
+                <h2>The Ritual</h2>
+                <div class="how-to-buy-steps">
+                    <div class="step card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Get a Wallet</h3>
+                            <p>Download Phantom, Solflare, or your preferred Solana wallet from the app store or browser extension store for free.</p>
+                        </div>
+                    </div>
+                    <div class="step card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Get Some SOL</h3>
+                            <p>If you don't have any SOL, you can buy it on a centralized exchange like Coinbase or Binance and send it to your wallet address.</p>
+                        </div>
+                    </div>
+                    <div class="step card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Go to Raydium</h3>
+                            <p>Connect your wallet to Raydium. Go to the swap page, paste the $GLM contract address, and confirm the swap.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community">
+            <div class="container reveal">
+                <h2>Join The Coven</h2>
+                <p>The community is where the vibe lives. If you know, you know. Find us in the digital shadows where the true degens gather. We don't post links; we attract believers.</p>
+                <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=C1jFmyh7F7t3mDYsfV67fuza6osEhpVoh8sMArVtueCV" target="_blank" class="btn btn-primary">Embrace The Vibe</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Groth Lady Model. All rights reserved. Invest responsibly.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Copy to clipboard functionality
+            const copyButton = document.getElementById('copyButton');
+            const copyText = document.getElementById('copyText');
+            const contractAddress = 'C1jFmyh7F7t3mDYsfV67fuza6osEhpVoh8sMArVtueCV';
+
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(contractAddress).then(() => {
+                    copyText.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyText.textContent = 'Copy';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal');
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // Smooth scroll for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+```
